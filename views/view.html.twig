@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+
+<label>95%  de ce que je susi est automatique, ici se joue les 5% restant, metacognition, je suis hors du programme </label> 
+
+<fieldset>
+<form method="POST" action="{{ path('emotionsPost') }}">
+     <legend>Emotion </legend>
+<p>
+      <label for="country">Comment je me sens?</label><br />
+       <select name="feels" id="feels">
+
+
+           <optgroup label="Tristesse">
+    		   <option value="1">Déplaisir</option>
+               <option value="2">Déception</option>
+               <option value="3">Constérnation</option>
+               <option value="4">Morosité</option>
+               <option value="5">Affliction</option>
+               <option value="6">Mélancolie</option>
+               <option value="7">Maussaderie</option>
+               <option value="8">blues</option>
+               <option value="9">cafard</option>
+               <option value="10">spleen</option>
+               <option value="11">Peine</option>
+               <option value="12">Boulversement</option>
+               <option value="13">Désespoir</option>
+
+
+           </optgroup>
+           <optgroup label="Colère">
+               <option value="14">Contrariété</option>
+               <option value="15">Irritation</option>
+               <option value="16">Hostilité</option>
+               <option value="17">Frustation</option>
+               <option value="18">Amertume</option>
+               <option value="19">Aigreur</option>
+               <option value="20">Aversion</option>
+               <option value="21">Enervement</option>
+               <option value="22">Exaspération</option>
+               <option value="23">Haine</option>
+               <option value="24">Rage</option>
+               <option value="25">Fureur</option>
+               <option value="26">Rancune</option>
+           </optgroup>
+           <optgroup label="Anxiété">
+               <option value="27">Souci</option>
+               <option value="28">Malaise</option>
+               <option value="29">Apprehénsion</option>
+               <option value="30">Crainte</option>
+               <option value="31">inquiétude</option>
+               <option value="32">Tension</option>
+               <option value="33">Nervosité</option>
+               <option value="34">Alarme</option>
+               <option value="35">Peur</option>
+               <option value="36">Panique</option>
+               <option value="37">Horreur</option>
+               <option value="38">Terreur</option>
+               <option value="39">Frayeur</option>
+           </optgroup>
+            <optgroup label="Joie"> 
+               <option value="40">Gaieté</option>
+               <option value="41">Hilarité</option>
+               <option value="42">Amusement</option>
+               <option value="43">Enjouement</option>
+               <option value="44">Allégresse</option>
+               <option value="45">Jovialité</option>
+               <option value="46">Euphorie</option>
+               <option value="47">Liesse</option>
+               <option value="48">Entrain</option>
+               <option value="49">Exultation</option>
+               <option value="50">Rejouissance</option>
+               <option value="51">Jubilation</option>
+               <option value="52">Satisfaction</option>
+              
+           </optgroup>
+            <optgroup label="Surprise">
+               <option value="53">Etonnement</option>
+               <option value="54">Ahurissement</option>
+               <option value="55">Stupéfaction</option>
+               <option value="56">Stupeur</option>
+               <option value="57">Effarement</option>
+               <option value="58">Ebahissement</option>
+           </optgroup>
+            <optgroup label="Dégoût">
+               <option value="59">Aversion</option>
+               <option value="60">Ecoeurement</option>
+               <option value="61">Répugnance</option>
+               <option value="62">Repulsion</option>
+           </optgroup>
+       </select>
+       </p>
+        <label for="toImprove">Que pense-je?</label><br />
+<textarea name="thinking" id="thinking"></textarea>
+<input type="submit" value="save">
+</form>
+</fieldset>
+
+  {% for emo in emos %}
+    <article>
+        <h2>{{ emo.id }}:{{ emo.emotion }} </h2>
+        <p>{{ emo.content }}</p>
+    </article>
+
+  {% endfor %}
+
+
+  {% if page == 0 %}
+ {{ page+1 }}<a href="{{path('homePage', {page: (page+1)})}}">></a>
+ {% elseif page >= 1 and pages == 5 %}
+  <a href="{{path('homePage', {page: (page-1)})}}"><</a>   {{ page+1 }}
+  <a href="{{path('homePage', {page: (page+1)})}}">></a>
+
+    {% elseif pages < 5 %}
+    <a href="{{path('homePage', {page: (page-1)})}}"><</a>{{ page+1 }}
+ {% endif %}
+</body>
+</html>
